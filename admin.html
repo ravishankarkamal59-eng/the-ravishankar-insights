@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Panel | The Ravishankar Insights</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:linear-gradient(135deg,#07111f,#123b5d);
+  color:white;
+  padding:25px 18px;
+}
+
+header h1{
+  max-width:1100px;
+  margin:auto;
+}
+
+.container{
+  max-width:1100px;
+  margin:25px auto;
+  padding:0 18px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+  repeat(auto-fit,minmax(250px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:white;
+  padding:22px;
+  border-radius:18px;
+  box-shadow:0 7px 22px rgba(0,0,0,.08);
+}
+
+.card h2{
+  color:#123b5d;
+  margin-bottom:15px;
+}
+
+label{
+  display:block;
+  margin:12px 0 6px;
+  font-weight:bold;
+}
+
+select,
+input{
+  width:100%;
+  padding:11px;
+  border:1px solid #ddd;
+  border-radius:9px;
+}
+
+button{
+  width:100%;
+  margin-top:15px;
+  padding:12px;
+  border:0;
+  border-radius:9px;
+  background:#1677ff;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.message{
+  margin-top:15px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🔐 The Ravishankar Insights — Admin Panel</h1>
+</header>
+
+<div class="container">
+
+<div class="grid">
+
+<div class="card">
+
+<h2>📄 PDF Upload</h2>
+
+<label>Section चुनें</label>
+
+<select id="section">
+
+<option value="ba">BA</option>
+<option value="ma">MA</option>
+<option value="uppcs">UPPCS</option>
+<option value="netjrf">NET JRF</option>
+<option value="upsc">UPSC</option>
+<option value="railway">Railway</option>
+<option value="ssc">SSC</option>
+<option value="banking">Banking</option>
+<option value="pyq-notes">PYQ & Notes</option>
+
+</select>
+
+<label>PDF चुनें</label>
+
+<input
+type="file"
+id="pdfFile"
+accept="application/pdf"
+>
+
+<button onclick="uploadPDF()">
+📤 Upload PDF
+</button>
+
+<div id="pdfMessage" class="message"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🎥 Video Upload</h2>
+
+<label>Section चुनें</label>
+
+<select id="videoSection">
+
+<option value="ba">BA</option>
+<option value="ma">MA</option>
+<option value="uppcs">UPPCS</option>
+<option value="netjrf">NET JRF</option>
+<option value="upsc">UPSC</option>
+<option value="railway">Railway</option>
+<option value="ssc">SSC</option>
+<option value="banking">Banking</option>
+<option value="pyq-notes">PYQ & Notes</option>
+
+</select>
+
+<label>Video चुनें</label>
+
+<input
+type="file"
+id="videoFile"
+accept="video/*"
+>
+
+<button onclick="uploadVideo()">
+🎬 Upload Video
+</button>
+
+<div id="videoMessage" class="message"></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+async function uploadPDF(){
+
+const file =
+document.getElementById("pdfFile").files[0];
+
+const section =
+document.getElementById("section").value;
+
+const message =
+document.getElementById("pdfMessage");
+
+if(!file){
+
+message.style.color="red";
+message.textContent="पहले PDF चुनें।";
+return;
+
+}
+
+message.style.color="green";
+message.textContent=
+"PDF तैयार है। Backend upload connection अगले step में जोड़ा जाएगा।";
+
+}
+
+
+async function uploadVideo(){
+
+const file =
+document.getElementById("videoFile").files[0];
+
+const section =
+document.getElementById("videoSection").value;
+
+const message =
+document.getElementById("videoMessage");
+
+if(!file){
+
+message.style.color="red";
+message.textContent="पहले Video चुनें।";
+return;
+
+}
+
+message.style.color="green";
+message.textContent=
+"Video तैयार है। Backend upload connection अगले step में जोड़ा जाएगा।";
+
+}
+
+</script>
+
+</body>
+</html>
