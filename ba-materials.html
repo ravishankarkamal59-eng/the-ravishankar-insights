@@ -206,6 +206,10 @@ style="display:none"
 </div>
 </div>
 
+<div class="container" id="uploadedMaterials" style="margin-top:30px;">
+<h2>📚 Uploaded BA Materials</h2>
+<div id="materialsList">⏳ Materials load हो रहे हैं...</div>
+</div>
 <script>
 
 function savePDF(inputId, linkId){
@@ -237,6 +241,38 @@ function savePDF(inputId, linkId){
   alert("PDF तैयार है। अब Open PDF दबाएँ।");
 }
 
+const BACKEND="https://ravishankar-insights-backend-1.onrender.com";
+
+async function loadUploadedMaterials(){
+  const box=document.getElementById("materialsList");
+  try{
+    const response=await fetch(BACKEND+"/api/materials/ba");
+    const data=await response.json();
+
+    if(!data.success || !data.files.length){
+      box.innerHTML="<p>अभी कोई uploaded material नहीं है।</p>";
+      return;
+    }
+
+    box.innerHTML=data.files.map(file=>`
+      <div style="background:white;padding:16px;margin:12px 0;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.08);">
+        <strong>📄 ${file.name}</strong>
+        <br>
+        <a href="${BACKEND}${file.url}" target="_blank" style="display:inline-block;margin-top:10px;padding:10px 16px;background:#1677ff;color:white;text-decoration:none;border-radius:8px;">
+        📖 Open PDF
+        </a>
+        <a href="${BACKEND}${file.url}" download style="display:inline-block;margin-top:10px;margin-left:8px;padding:10px 16px;background:#168f45;color:white;text-decoration:none;border-radius:8px;">
+        ⬇️ Download
+        </a>
+      </div>
+    `).join("");
+  }catch(error){
+    console.error(error);
+    box.innerHTML="<p style="color:red;">Materials load नहीं हो पाए।</p>";
+  }
+}
+
+loadUploadedMaterials();
 </script>
 
 </body>
