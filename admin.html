@@ -2,87 +2,57 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Admin Panel | The Ravishankar Insights</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin Login | The Ravishankar Insights</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,sans-serif;
-}
-
+*{box-sizing:border-box}
 body{
-  background:#f4f7fb;
-  color:#172033;
-}
-
-header{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:Arial,sans-serif;
   background:linear-gradient(135deg,#07111f,#123b5d);
-  color:white;
-  padding:25px 18px;
 }
-
-header h1{
-  max-width:1100px;
-  margin:auto;
-}
-
-.container{
-  max-width:1100px;
-  margin:25px auto;
-  padding:0 18px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:
-  repeat(auto-fit,minmax(250px,1fr));
-  gap:18px;
-}
-
 .card{
+  width:92%;
+  max-width:420px;
   background:white;
-  padding:22px;
-  border-radius:18px;
-  box-shadow:0 7px 22px rgba(0,0,0,.08);
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 15px 40px rgba(0,0,0,.3);
 }
-
-.card h2{
-  color:#123b5d;
-  margin-bottom:15px;
-}
-
+h1{text-align:center;color:#123b5d}
+p{text-align:center;color:#666}
 label{
   display:block;
-  margin:12px 0 6px;
+  margin-top:16px;
   font-weight:bold;
 }
-
-select,
 input{
   width:100%;
-  padding:11px;
+  padding:13px;
+  margin-top:7px;
   border:1px solid #ddd;
-  border-radius:9px;
+  border-radius:10px;
+  font-size:16px;
 }
-
 button{
   width:100%;
-  margin-top:15px;
-  padding:12px;
+  margin-top:22px;
+  padding:14px;
   border:0;
-  border-radius:9px;
+  border-radius:10px;
   background:#1677ff;
   color:white;
+  font-size:16px;
   font-weight:bold;
-  cursor:pointer;
 }
-
-.message{
+#message{
   margin-top:15px;
+  text-align:center;
   font-weight:bold;
 }
 </style>
@@ -90,145 +60,76 @@ button{
 
 <body>
 
-<header>
-<h1>🔐 The Ravishankar Insights — Admin Panel</h1>
-</header>
-
-<div class="container">
-
-<div class="grid">
-
 <div class="card">
+<h1>🔐 Admin Login</h1>
+<p>The Ravishankar Insights</p>
 
-<h2>📄 PDF Upload</h2>
+<form id="adminLoginForm">
 
-<label>Section चुनें</label>
+<label>Username</label>
+<input id="username" type="text" required>
 
-<select id="section">
+<label>Password</label>
+<input id="password" type="password" required>
 
-<option value="ba">BA</option>
-<option value="ma">MA</option>
-<option value="uppcs">UPPCS</option>
-<option value="netjrf">NET JRF</option>
-<option value="upsc">UPSC</option>
-<option value="railway">Railway</option>
-<option value="ssc">SSC</option>
-<option value="banking">Banking</option>
-<option value="pyq-notes">PYQ & Notes</option>
+<button type="submit">Login</button>
 
-</select>
+<div id="message"></div>
 
-<label>PDF चुनें</label>
-
-<input
-type="file"
-id="pdfFile"
-accept="application/pdf"
->
-
-<button onclick="uploadPDF()">
-📤 Upload PDF
-</button>
-
-<div id="pdfMessage" class="message"></div>
-
+</form>
 </div>
-
-
-<div class="card">
-
-<h2>🎥 Video Upload</h2>
-
-<label>Section चुनें</label>
-
-<select id="videoSection">
-
-<option value="ba">BA</option>
-<option value="ma">MA</option>
-<option value="uppcs">UPPCS</option>
-<option value="netjrf">NET JRF</option>
-<option value="upsc">UPSC</option>
-<option value="railway">Railway</option>
-<option value="ssc">SSC</option>
-<option value="banking">Banking</option>
-<option value="pyq-notes">PYQ & Notes</option>
-
-</select>
-
-<label>Video चुनें</label>
-
-<input
-type="file"
-id="videoFile"
-accept="video/*"
->
-
-<button onclick="uploadVideo()">
-🎬 Upload Video
-</button>
-
-<div id="videoMessage" class="message"></div>
-
-</div>
-
-</div>
-
-</div>
-
 
 <script>
+const API =
+"https://ravishankar-insights-backend-1.onrender.com";
 
-async function uploadPDF(){
+document.getElementById("adminLoginForm").addEventListener("submit",
+async function(e){
 
-const file =
-document.getElementById("pdfFile").files[0];
+e.preventDefault();
 
-const section =
-document.getElementById("section").value;
+const message = document.getElementById("message");
+message.style.color = "black";
+message.textContent = "Login हो रहा है...";
 
-const message =
-document.getElementById("pdfMessage");
+try{
 
-if(!file){
+const response = await fetch(API + "/api/admin/login",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+username:document.getElementById("username").value,
+password:document.getElementById("password").value
+})
+});
 
+const data = await response.json();
+
+if(!response.ok){
 message.style.color="red";
-message.textContent="पहले PDF चुनें।";
+message.textContent=data.message || "Login failed.";
 return;
-
 }
+
+localStorage.setItem("adminToken",data.token);
 
 message.style.color="green";
-message.textContent=
-"PDF तैयार है। Backend upload connection अगले step में जोड़ा जाएगा।";
+message.textContent="Admin Login सफल!";
 
-}
+setTimeout(()=>{
+window.location.href="admin-dashboard.html";
+},700);
 
-
-async function uploadVideo(){
-
-const file =
-document.getElementById("videoFile").files[0];
-
-const section =
-document.getElementById("videoSection").value;
-
-const message =
-document.getElementById("videoMessage");
-
-if(!file){
+}catch(error){
 
 message.style.color="red";
-message.textContent="पहले Video चुनें।";
-return;
-
-}
-
-message.style.color="green";
 message.textContent=
-"Video तैयार है। Backend upload connection अगले step में जोड़ा जाएगा।";
-
+"Backend से connection नहीं हो पाया।";
 }
 
+});
 </script>
 
 </body>
