@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Upload | The Ravishankar Insights</title>
+<style>
+body{font-family:Arial;background:#f4f7fb;margin:0;color:#172033}
+header{background:linear-gradient(135deg,#07111f,#123b5d);color:white;padding:25px}
+.container{max-width:700px;margin:25px auto;padding:18px}
+.card{background:white;padding:25px;border-radius:18px;box-shadow:0 7px 22px #0001;margin-bottom:20px}
+h2{color:#123b5d}
+label{display:block;font-weight:bold;margin:15px 0 7px}
+select,input,button{width:100%;padding:12px;border-radius:9px;box-sizing:border-box}
+select,input{border:1px solid #ddd}
+button{border:0;background:#1677ff;color:white;font-weight:bold;margin-top:18px}
+.message{margin-top:15px;font-weight:bold}
+.back{display:block;text-align:center;margin-top:15px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>📤 Admin Upload</h1>
+<p>The Ravishankar Insights</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>📄 PDF / 🎥 Video Upload</h2>
+
+<label>Section चुनें</label>
+<select id="section">
+<option value="ba">BA</option>
+<option value="ma">MA</option>
+<option value="uppcs">UPPCS</option>
+<option value="netjrf">NET JRF</option>
+<option value="upsc">UPSC</option>
+<option value="railway">Railway</option>
+<option value="ssc">SSC</option>
+<option value="banking">Banking</option>
+<option value="pyq-notes">PYQ & Notes</option>
+</select>
+
+<label>File चुनें</label>
+<input type="file" id="file" accept=".pdf,video/*">
+
+<button onclick="uploadFile()">📤 Upload File</button>
+
+<div id="message" class="message"></div>
+</div>
+
+<a class="back" href="admin-dashboard.html">⬅️ Admin Dashboard पर वापस जाएँ</a>
+
+</div>
+
+<script>
+const API="https://ravishankar-insights-backend-1.onrender.com";
+
+async function uploadFile(){
+
+ const file=document.getElementById("file").files[0];
+ const section=document.getElementById("section").value;
+ const message=document.getElementById("message");
+ const token=localStorage.getItem("adminToken");
+
+ if(!token){
+   message.style.color="red";
+   message.textContent="Admin login required.";
+   return;
+ }
+
+ if(!file){
+   message.style.color="red";
+   message.textContent="पहले PDF या Video चुनें।";
+   return;
+ }
+
+ const formData=new FormData();
+ formData.append("file",file);
+ formData.append("section",section);
+
+ message.style.color="black";
+ message.textContent="Upload हो रहा है...";
+
+ try{
+
+   const response=await fetch(API+"/api/admin/upload",{
+     method:"POST",
+     headers:{
+       "Authorization":"Bearer "+token
+     },
+     body:formData
+   });
+
+   const data=await response.json();
+
+   if(!response.ok){
+     throw new Error(data.message||"Upload failed");
+   }
+
+   message.style.color="green";
+   message.textContent="✅ File successfully upload हो गई।";
+
+ }catch(error){
+
+   message.style.color="red";
+   message.textContent="❌ "+error.message;
+
+ }
+}
+</script>
+
+</body>
+</html>
