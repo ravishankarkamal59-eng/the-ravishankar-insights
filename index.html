@@ -285,6 +285,18 @@ footer{
 @media(max-width:900px){.syllabus-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:500px){.syllabus-grid{grid-template-columns:1fr}}
 </style>
+<style>
+.exam-category{max-width:1150px;margin:35px auto}
+.exam-category>h3{font-size:24px;color:#123d70;margin:35px 0 18px;border-left:5px solid #1261c9;padding-left:12px}
+.student-grid{max-width:1100px;margin:0 auto 25px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.student-card{background:white;padding:22px;border-radius:18px;box-shadow:0 7px 22px #0001;transition:.25s}
+.student-card:hover{transform:translateY(-5px);box-shadow:0 12px 28px #0002}
+.student-card h3{margin-top:0;color:#123d70}
+.student-card p{min-height:45px;line-height:1.5}
+.student-card a{display:inline-block;text-decoration:none;background:#1261c9;color:white;padding:9px 12px;border-radius:8px;font-size:14px}
+@media(max-width:900px){.student-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.student-grid{grid-template-columns:1fr}}
+</style>
 </head>
 
 <body>
@@ -364,21 +376,131 @@ footer{
 </section>
 
 <section id="student" class="student-section">
+
 <div class="student-heading">
 <span>🎓 STUDENT PORTAL</span>
-<h2>अपनी तैयारी का Section चुनें</h2>
-<p>Study Material देखने के लिए पहले Student Login/Register करें।</p>
+<h2>भारत के प्रमुख Exams की तैयारी</h2>
+<p>
+Study Material, Notes, PYQs और अन्य resources देखने के लिए
+Student Login/Register करें।
+</p>
 </div>
+
+<div class="exam-category">
+
+<h3>🎓 University & Academic</h3>
 <div class="student-grid">
-<div class="student-card"><h3>📘 BA</h3><p>BA Study Material • Notes • PYQs</p><a href="login.html">🔐 Login करके देखें</a></div>
-<div class="student-card"><h3>📕 MA</h3><p>MA Study Material • Notes • PYQs</p><a href="login.html">🔐 Login करके देखें</a></div>
-<div class="student-card"><h3>🏛️ UPSC</h3><p>UPSC Prelims • Mains • Notes</p><a href="login.html">🔐 Login करके देखें</a></div>
-<div class="student-card"><h3>🏛️ UPPCS</h3><p>UPPCS Study Material • PYQs</p><a href="login.html">🔐 Login करके देखें</a></div>
-<div class="student-card"><h3>📚 NET-JRF</h3><p>NET-JRF Notes • PYQs • Material</p><a href="login.html">🔐 Login करके देखें</a></div>
-<div class="student-card"><h3>🚆 Railway</h3><p>Railway Exams • Notes • PYQs</p><a href="login.html">🔐 Login करके देखें</a></div>
-<div class="student-card"><h3>📝 SSC</h3><p>SSC Exams • Notes • PYQs</p><a href="login.html">🔐 Login करके देखें</a></div>
-<div class="student-card"><h3>🏦 Banking</h3><p>Banking Exams • Notes • PYQs</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>📘 BA</h3><p>BA • Notes • PYQs • Study Material</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>📕 MA</h3><p>MA • Notes • PYQs • Study Material</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🎓 CUET</h3><p>CUET UG • PG Preparation</p><a href="login.html">🔐 Login करके देखें</a></div>
 </div>
+
+<h3>🏛️ UPSC & Civil Services</h3>
+<div class="student-grid">
+<div class="student-card"><h3>🏛️ UPSC CSE</h3><p>IAS • IPS • IFS • Prelims • Mains</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🛡️ CDS</h3><p>Combined Defence Services</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🎖️ NDA</h3><p>National Defence Academy</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🛡️ CAPF</h3><p>Central Armed Police Forces</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🩺 UPSC CMS</h3><p>Combined Medical Services</p><a href="login.html">🔐 Login करके देखें</a></div>
+</div>
+
+<h3>🏢 State PSC</h3>
+<div class="student-grid">
+<div class="student-card"><h3>🏛️ UPPCS</h3><p>Uttar Pradesh PCS</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🏛️ State PSC</h3><p>Other State Public Service Commissions</p><a href="login.html">🔐 Login करके देखें</a></div>
+</div>
+
+<h3>📝 SSC Exams</h3>
+<div class="student-grid">
+<div class="student-card"><h3>📝 SSC CGL</h3><p>Graduate Level Examination</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>📝 SSC CHSL</h3><p>10+2 Level Examination</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>📝 SSC MTS</h3><p>Multi Tasking Staff</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>👮 SSC GD</h3><p>Constable GD</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>👮 SSC CPO</h3><p>Sub-Inspector Examination</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>📊 SSC Selection Post</h3><p>Selection Post Examination</p><a href="login.html">🔐 Login करके देखें</a></div>
+</div>
+
+<h3>🏦 Banking & Finance</h3>
+<div class="student-grid">
+<div class="student-card"><h3>🏦 IBPS PO</h3><p>Probationary Officer</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🏦 IBPS Clerk</h3><p>Customer Service Associate</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🏦 IBPS RRB</h3><p>Office Assistant • Officer Scale</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🏦 SBI PO</h3><p>State Bank Probationary Officer</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🏦 SBI Clerk</h3><p>Junior Associate</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🏛️ RBI</h3><p>RBI Grade B & Other Exams</p><a href="login.html">🔐 Login करके देखें</a></div>
+</div>
+
+<h3>🚆 Railway Exams</h3>
+<div class="student-grid">
+<div class="student-card"><h3>🚆 RRB NTPC</h3><p>Non-Technical Popular Categories</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🚆 RRB Group D</h3><p>Level 1 Railway Recruitment</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🚆 RRB ALP</h3><p>Assistant Loco Pilot</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🚆 RRB Technician</h3><p>Railway Technician</p><a href="login.html">🔐 Login करके देखें</a></div>
+</div>
+
+<h3>👮 Police & Defence</h3>
+<div class="student-grid">
+<div class="student-card"><h3>👮 SSC GD</h3><p>Central Armed Police Forces</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>👮 State Police</h3><p>Police Constable & SI Exams</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🎖️ Defence Exams</h3><p>Army • Navy • Air Force</p><a href="login.html">🔐 Login करके देखें</a></div>
+</div>
+
+<h3>👨‍🏫 Teaching & Education</h3>
+<div class="student-grid">
+<div class="student-card"><h3>👨‍🏫 CTET</h3><p>Central Teacher Eligibility Test</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>👩‍🏫 TET</h3><p>Teacher Eligibility Tests</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>📚 TGT</h3><p>Trained Graduate Teacher Exams</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>📚 PGT</h3><p>Post Graduate Teacher Exams</p><a href="login.html">🔐 Login करके देखें</a></div>
+</div>
+
+<h3>📚 NET, JRF & Research</h3>
+<div class="student-grid">
+<div class="student-card"><h3>📚 UGC NET</h3><p>NET Paper 1 & Subject Papers</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🔬 NET-JRF</h3><p>JRF Preparation • PYQs • Notes</p><a href="login.html">🔐 Login करके देखें</a></div>
+</div>
+
+<h3>🧪 Engineering Entrance</h3>
+<div class="student-grid">
+<div class="student-card"><h3>🧪 JEE Main</h3><p>Engineering Entrance • NTA</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🧪 JEE Advanced</h3><p>Advanced Engineering Entrance</p><a href="login.html">🔐 Login करके देखें</a></div>
+</div>
+<h3>🏥 Medical Entrance</h3>
+<div class="student-grid">
+<div class="student-card"><h3>🩺 NEET UG</h3><p>Medical Entrance • NTA</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🩺 NEET PG</h3><p>Postgraduate Medical Entrance</p><a href="login.html">🔐 Login करके देखें</a></div>
+</div>
+<h3>🏛️ University & Law Entrance</h3>
+<div class="student-grid">
+<div class="student-card"><h3>🎓 CUET UG</h3><p>Central Universities Entrance</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🎓 CUET PG</h3><p>Postgraduate University Entrance</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>⚖️ AIBE</h3><p>All India Bar Examination</p><a href="login.html">🔐 Login करके देखें</a></div>
+</div>
+<h3>🏛️ UP Government Exams</h3>
+<div class="student-grid">
+<div class="student-card"><h3>📝 UPSSSC PET</h3><p>Preliminary Eligibility Test</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>📋 UPSSSC</h3><p>Various Group C Examinations</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>👮 UP Police</h3><p>Constable • SI • Other Posts</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🏛️ UP Judiciary</h3><p>Civil Judge • Judicial Services</p><a href="login.html">🔐 Login करके देखें</a></div>
+</div>
+<h3>🛡️ Defence & Armed Forces</h3>
+<div class="student-grid">
+<div class="student-card"><h3>🎖️ Agniveer</h3><p>Army • Navy • Air Force</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🛡️ CAPF</h3><p>Central Armed Police Forces</p><a href="login.html">🔐 Login करके देखें</a></div>
+</div>
+<h3>🏢 Insurance & Other Government Exams</h3>
+<div class="student-grid">
+<div class="student-card"><h3>🏢 LIC</h3><p>Insurance Recruitment Exams</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🏢 EPFO</h3><p>EO/AO • SSA • Other Exams</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🏢 ESIC</h3><p>Various Recruitment Exams</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🏢 FCI</h3><p>Food Corporation Recruitment</p><a href="login.html">🔐 Login करके देखें</a></div>
+</div>
+<h3>⚖️ Law & Other Professional Exams</h3>
+<div class="student-grid">
+<div class="student-card"><h3>⚖️ CLAT</h3><p>Common Law Admission Test</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>⚖️ AILET</h3><p>National Law University Entrance</p><a href="login.html">🔐 Login करके देखें</a></div>
+<div class="student-card"><h3>🩺 NEET</h3><p>Medical Entrance Preparation</p><a href="login.html">🔐 Login करके देखें</a></div>
+</div>
+
 </section>
 <section id="updates" class="professional-info">
 <div class="info-box">
