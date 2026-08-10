@@ -318,6 +318,77 @@ footer{
 .student-info-box .info-box{text-align:center;max-width:900px}
 .student-info-login{display:inline-block;margin-top:12px;background:#1261c9;color:white;text-decoration:none;padding:12px 20px;border-radius:10px;font-weight:700}
 </style>
+
+<style id="section-navigation-style">
+.route-hidden{display:none!important}
+.route-visible{display:block!important}
+
+#student-info,#about,#updates,#student,#student-old,#syllabus,#contact,#about-old{
+  scroll-margin-top:90px;
+}
+
+body.route-home #student,
+body.route-home #student-old,
+body.route-home #syllabus,
+body.route-home #about-old,
+body.route-home #updates,
+body.route-home #contact{
+  display:none!important;
+}
+
+body.route-student > *:not(header):not(.route-banner):not(#student){
+  display:none!important;
+}
+body.route-student #student{
+  display:block!important;
+}
+
+body.route-syllabus > *:not(header):not(.route-banner):not(#syllabus){
+  display:none!important;
+}
+body.route-syllabus #syllabus{
+  display:block!important;
+}
+
+body.route-about > *:not(header):not(.route-banner):not(#about){
+  display:none!important;
+}
+body.route-about #about{
+  display:block!important;
+}
+
+body.route-updates > *:not(header):not(.route-banner):not(#updates){
+  display:none!important;
+}
+body.route-updates #updates{
+  display:block!important;
+}
+
+body.route-contact > *:not(header):not(.route-banner):not(#contact){
+  display:none!important;
+}
+body.route-contact #contact{
+  display:block!important;
+}
+
+body.route-home .student-section,
+body.route-home .syllabus-section{
+  display:none!important;
+}
+
+.route-banner{
+  position:relative;
+  z-index:10;
+}
+
+.founder-section img{
+  max-width:120px;
+  height:auto;
+  border-radius:50%;
+  object-fit:cover;
+}
+</style>
+
 </head>
 
 <body>
@@ -745,5 +816,81 @@ document.querySelectorAll("#mainNav a").forEach(function(link){link.addEventList
 <p><strong>The Ravishankar Insights</strong></p>
 </div>
 </section>
+
+<script id="section-navigation-script">
+(function(){
+
+function hideAll(){
+ document.body.classList.remove(
+  "route-home","route-student","route-syllabus",
+  "route-about","route-updates","route-contact"
+ );
+}
+
+function showRoute(route){
+ hideAll();
+
+ if(route==="student") document.body.classList.add("route-student");
+ else if(route==="syllabus") document.body.classList.add("route-syllabus");
+ else if(route==="about") document.body.classList.add("route-about");
+ else if(route==="updates") document.body.classList.add("route-updates");
+ else if(route==="contact") document.body.classList.add("route-contact");
+ else document.body.classList.add("route-home");
+
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function routeFromHash(){
+ let r=location.hash.replace("#","").trim().toLowerCase();
+
+ if(r==="student" || r==="student-info") showRoute("student");
+ else if(r==="syllabus") showRoute("syllabus");
+ else if(r==="about") showRoute("about");
+ else if(r==="updates") showRoute("updates");
+ else if(r==="contact") showRoute("contact");
+ else showRoute("home");
+}
+
+document.addEventListener("click",function(e){
+ const a=e.target.closest("a");
+ if(!a)return;
+
+ const href=a.getAttribute("href")||"";
+
+ if(href==="#student" || href==="#student-info"){
+  e.preventDefault();
+  history.pushState(null,"","#student");
+  showRoute("student");
+ }
+ else if(href==="#syllabus"){
+  e.preventDefault();
+  history.pushState(null,"","#syllabus");
+  showRoute("syllabus");
+ }
+ else if(href==="#about"){
+  e.preventDefault();
+  history.pushState(null,"","#about");
+  showRoute("about");
+ }
+ else if(href==="#updates"){
+  e.preventDefault();
+  history.pushState(null,"","#updates");
+  showRoute("updates");
+ }
+ else if(href==="#contact"){
+  e.preventDefault();
+  history.pushState(null,"","#contact");
+  showRoute("contact");
+ }
+});
+
+window.addEventListener("hashchange",routeFromHash);
+window.addEventListener("popstate",routeFromHash);
+
+routeFromHash();
+
+})();
+</script>
+
 </body>
 </html>
