@@ -1216,18 +1216,36 @@ Open All Materials →
         .trim()
         .toUpperCase();
 
-      let target = null;
+      let target = materialMap[title] || null;
 
-      for(const key in materialMap){
-        if(title === key || title.includes(key)){
-          target = materialMap[key];
-          break;
-        }
-      }
+      /*
+        Special/general cards
+      */
+      if(!target && title.includes("NET") && title.includes("JRF"))
+        target = "net-jrf-materials.html";
+
+      if(!target && title.includes("UPSC"))
+        target = "civil-defence-materials.html";
+
+      if(!target && title.includes("SSC"))
+        target = "ssc-materials.html";
+
+      if(!target && (
+        title.includes("IBPS") ||
+        title.includes("SBI") ||
+        title.includes("RBI")
+      ))
+        target = "banking-exams-materials.html";
+
+      if(!target && (
+        title.includes("RRB") ||
+        title.includes("RAILWAY")
+      ))
+        target = "railway-exams-materials.html";
 
       if(target){
         loginLink.href = target;
-        loginLink.textContent = "🔓 Open Materials →";
+        loginLink.textContent = "📚 Materials देखें →";
         loginLink.classList.add("open");
         loginLink.removeAttribute("onclick");
       }
