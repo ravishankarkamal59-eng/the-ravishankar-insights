@@ -586,16 +586,30 @@ return;
 }
 
 
-message(
-"🎉 Registration सफल हो गया!",
-"green"
+/* SAVE REGISTERED STUDENT SESSION */
+
+if(data.user){
+  localStorage.setItem(
+    "studentUser",
+    JSON.stringify(data.user)
+  );
+}
+
+localStorage.setItem(
+  "studentLoggedIn",
+  "true"
 );
 
+message(
+"🎉 Registration सफल हो गया! Dashboard खुल रहा है...",
+"green"
+);
 
 setTimeout(
 function(){
 
-showLogin();
+window.location.href =
+"student-dashboard.html";
 
 },
 1200
