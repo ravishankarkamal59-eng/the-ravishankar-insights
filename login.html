@@ -445,6 +445,24 @@ await response.json();
 
 if(!data.success){
 
+if(
+(data.message || "").includes("पहले से मौजूद") ||
+(data.message || "").toLowerCase().includes("already")
+){
+
+message(
+"⚠️ यह Email या Mobile पहले से Registered है। कृपया Login करें।",
+"red"
+);
+
+setTimeout(function(){
+showLogin();
+}, 1800);
+
+return;
+
+}
+
 message(
 data.message ||
 "OTP भेजने में समस्या हुई।",
