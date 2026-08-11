@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>🏥 Medical Entrance | The Ravishankar Insights</title>
+
+<style>
+
+body {
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#222;
+}
+
+header {
+  padding:25px 15px;
+  text-align:center;
+  background:linear-gradient(135deg,#172554,#2563eb);
+  color:white;
+}
+
+.container {
+  max-width:1100px;
+  margin:auto;
+  padding:25px 15px;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.material-card {
+  background:white;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
+  text-align:center;
+}
+
+.icon {
+  font-size:42px;
+}
+
+.material-card h2 {
+  margin:10px 0;
+}
+
+.material-card p {
+  color:#666;
+}
+
+button {
+  border:0;
+  border-radius:10px;
+  padding:12px 16px;
+  margin:5px;
+  cursor:pointer;
+}
+
+.pdf {
+  background:#2563eb;
+  color:white;
+}
+
+.admin-only {
+  display:none !important;
+}
+
+.back {
+  display:inline-block;
+  margin-bottom:20px;
+  text-decoration:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🏥 Medical Entrance</h1>
+<p>The Ravishankar Insights</p>
+</header>
+
+<div class="container">
+
+<a class="back" href="student-dashboard.html">
+⬅️ Back to Student Dashboard
+</a>
+
+<div class="grid">
+
+        <div class="material-card">
+          <div class="icon">🩺</div>
+          <h2>NEET UG</h2>
+          <p>Medical Entrance • NTA</p>
+
+          <button class="pdf">📄 Open PDF</button>
+
+          <button class="admin-only">
+            🔐 Admin PDF Upload
+          </button>
+
+          <button class="admin-only">
+            🎥 Admin Video Upload
+          </button>
+        </div>
+
+        <div class="material-card">
+          <div class="icon">🩺</div>
+          <h2>NEET PG</h2>
+          <p>Postgraduate Medical Entrance</p>
+
+          <button class="pdf">📄 Open PDF</button>
+
+          <button class="admin-only">
+            🔐 Admin PDF Upload
+          </button>
+
+          <button class="admin-only">
+            🎥 Admin Video Upload
+          </button>
+        </div>
+
+</div>
+
+</div>
+
+<script>
+
+const API = "https://ravishankar-insights-backend-1.onrender.com";
+
+async function loadMaterials() {
+
+  try {
+
+    const response =
+      await fetch(API + "/api/materials/medical");
+
+    const data = await response.json();
+
+    if (!data.success) return;
+
+    const pdfFiles =
+      (data.files || []).filter(file =>
+        file.name.toLowerCase().endsWith(".pdf")
+      );
+
+    const buttons =
+      document.querySelectorAll(".pdf");
+
+    buttons.forEach((button, index) => {
+
+      if (pdfFiles[index]) {
+
+        button.onclick = () => {
+          window.open(
+            API + pdfFiles[index].url,
+            "_blank"
+          );
+        };
+
+      } else {
+
+        button.textContent =
+          "📄 PDF अभी उपलब्ध नहीं";
+
+        button.disabled = true;
+
+      }
+
+    });
+
+  } catch(error) {
+
+    console.error(
+      "medical materials error:",
+      error
+    );
+
+  }
+
+}
+
+document.addEventListener(
+  "DOMContentLoaded",
+  loadMaterials
+);
+
+</script>
+
+</body>
+</html>
