@@ -718,53 +718,99 @@ Open All Materials →
 
 
 
-<!-- AUTO CENTRAL SECTIONS -->
-<section id="centralSections" style="margin-top:30px;">
-  <h2 style="margin-bottom:18px;">📚 All Study Sections</h2>
-  <div id="centralSectionGrid" class="grid"></div>
+
+<!-- ==========================================
+     ALL STUDY SECTIONS FROM HOMEPAGE
+     ========================================== -->
+
+<section id="centralSections" style="margin-top:35px;">
+
+  <div class="student-heading">
+    <span>🎓 STUDENT PORTAL</span>
+    <h2>📚 All Study Sections</h2>
+    <p>
+      BA, MA, UPSC, UPPCS, SSC, Banking, Railway,
+      NET-JRF और अन्य सभी Study Materials
+    </p>
+  </div>
+
+  <div id="centralSectionGrid"></div>
+
 </section>
 
 <script>
-(async function loadCentralSections(){
+(async function loadAllStudentSections(){
 
-  const grid = document.getElementById("centralSectionGrid");
+  const box = document.getElementById("centralSectionGrid");
 
-  try {
+  try{
 
     const response = await fetch("index.html");
     const html = await response.text();
 
-    const doc = new DOMParser().parseFromString(html, "text/html");
+    const doc =
+      new DOMParser().parseFromString(html,"text/html");
 
-    const cards = doc.querySelectorAll(".student-card");
+    const originalStudent =
+      doc.querySelector("#student");
 
-    cards.forEach(card => {
-
-      const copy = card.cloneNode(true);
-
-      const link = copy.querySelector("a");
-
-      if (link) {
-        const original = link.getAttribute("href");
-
-        if (original && original !== "#") {
-          link.href = original;
-        }
-
-        link.textContent = "📚 Open Section";
-      }
-
-      grid.appendChild(copy);
-
-    });
-
-    if (!cards.length) {
-      document.getElementById("centralSections").style.display = "none";
+    if(!originalStudent){
+      throw new Error("Student section नहीं मिला");
     }
 
-  } catch(error) {
+    /*
+      Homepage का पूरा Student Portal
+      dashboard में लाया जा रहा है।
+    */
 
-    console.error("Central sections error:", error);
+    const clone =
+      originalStudent.cloneNode(true);
+
+    /*
+      Homepage पर hidden था।
+      Dashboard में इसे visible करना है।
+    */
+
+    clone.classList.remove("home-clean-hide");
+
+    /*
+      Heading को dashboard के लिए साफ रखते हैं
+    */
+
+    const heading =
+      clone.querySelector(".student-heading");
+
+    if(heading){
+      heading.remove();
+    }
+
+    box.innerHTML = "";
+
+    box.appendChild(clone);
+
+    /*
+      Login button को dashboard में
+      वापस login page पर भेजने के बजाय
+      फिलहाल original links रहने देंगे।
+    */
+
+    console.log(
+      "✅ सभी Student sections dashboard में load हो गए।"
+    );
+
+  }catch(error){
+
+    console.error(
+      "Student sections error:",
+      error
+    );
+
+    box.innerHTML = `
+      <div class="welcome">
+        <h3>⚠️ Study Sections load नहीं हो पाए</h3>
+        <p>कृपया page को refresh करें।</p>
+      </div>
+    `;
 
   }
 
@@ -772,16 +818,29 @@ Open All Materials →
 </script>
 
 
-<!-- ADMIN ARTICLE CARDS -->
-<section id="adminArticleSections" style="margin-top:35px;">
-  <h2 style="margin-bottom:18px;">✨ Latest Study Materials</h2>
+<!-- ==========================================
+     ADMIN SAVED ARTICLES
+     ========================================== -->
+
+<section id="adminArticleSections" style="margin-top:45px;">
+
+  <div class="student-heading">
+    <span>📰 ADMIN PUBLISHED</span>
+    <h2>✨ Latest Study Materials</h2>
+    <p>
+      Admin द्वारा publish किए गए नए Articles और Study Materials
+    </p>
+  </div>
+
   <div id="adminArticleGrid" class="grid"></div>
+
 </section>
 
 <script>
 (async function loadAdminArticleCards(){
 
-  const grid = document.getElementById("adminArticleGrid");
+  const grid =
+    document.getElementById("adminArticleGrid");
 
   try{
 
@@ -795,21 +854,34 @@ Open All Materials →
       throw new Error("Articles API error");
     }
 
-    const articles = data.articles.slice().reverse();
+    const articles =
+      data.articles.slice().reverse();
 
     if(!articles.length){
-      document.getElementById("adminArticleSections").style.display = "none";
+
+      document.getElementById(
+        "adminArticleSections"
+      ).style.display = "none";
+
       return;
     }
 
     articles.forEach(article => {
 
-      const card = document.createElement("div");
-      card.className = "admin-article-card";
+      const card =
+        document.createElement("div");
 
-      const title = article.title || "Study Material";
-      const category = article.category || "General";
-      const text = article.article || "";
+      card.className =
+        "admin-article-card";
+
+      const title =
+        article.title || "Study Material";
+
+      const category =
+        article.category || "General";
+
+      const text =
+        article.article || "";
 
       const shortText =
         text.length > 110
@@ -824,18 +896,24 @@ Open All Materials →
         "SSC":"📝",
         "RAILWAY":"🚆",
         "BANKING":"🏦",
-        "NET-JRF":"🎓"
+        "NET-JRF":"🎓",
+        "CUET":"🎓"
       };
 
       const icon =
-        iconMap[String(category).toUpperCase()] || "📚";
+        iconMap[
+          String(category).toUpperCase()
+        ] || "📚";
 
       const articleLink =
         "articles.html?id=" +
         encodeURIComponent(article.id);
 
       card.innerHTML = `
-        <div class="admin-article-icon">${icon}</div>
+
+        <div class="admin-article-icon">
+          ${icon}
+        </div>
 
         <span class="admin-article-category">
           ${escapeHTMLDashboard(category)}
@@ -856,10 +934,16 @@ Open All Materials →
         </a>
 
         <div class="admin-article-date">
-          ${article.createdAt
-            ? "Added: " + new Date(article.createdAt).toLocaleDateString("hi-IN")
-            : ""}
+          ${
+            article.createdAt
+              ? "Added: " +
+                new Date(
+                  article.createdAt
+                ).toLocaleDateString("hi-IN")
+              : ""
+          }
         </div>
+
       `;
 
       grid.appendChild(card);
@@ -868,22 +952,33 @@ Open All Materials →
 
   }catch(error){
 
-    console.error("Admin article cards error:", error);
+    console.error(
+      "Admin article cards error:",
+      error
+    );
 
-    document.getElementById("adminArticleSections").style.display = "none";
+    document.getElementById(
+      "adminArticleSections"
+    ).style.display = "none";
 
   }
 
 })();
 
+
 function escapeHTMLDashboard(text){
 
-  const div = document.createElement("div");
-  div.textContent = text;
+  const div =
+    document.createElement("div");
+
+  div.textContent =
+    text == null ? "" : String(text);
+
   return div.innerHTML;
 
 }
 </script>
+
 
 </main>
 
