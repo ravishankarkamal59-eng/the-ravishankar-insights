@@ -1116,13 +1116,75 @@ Open All Materials →
     box.appendChild(clone);
 
     /*
-      Login button को dashboard में
-      वापस login page पर भेजने के बजाय
-      फिलहाल original links रहने देंगे।
+      ==========================================
+      DASHBOARD ONLY — LOGIN → OPEN
+      ==========================================
+      IMPORTANT:
+      index.html में original Login buttons
+      बिल्कुल नहीं बदले जाएंगे।
     */
 
+    const materialMap = {
+      "BA": "ba-materials.html",
+      "MA": "ma-materials.html",
+      "UPSC": "upsc-materials.html",
+      "UPPCS": "uppcs-materials.html",
+      "SSC": "ssc-materials.html",
+      "BANKING": "banking-materials.html",
+      "RAILWAY": "railway-materials.html",
+      "NET-JRF": "net-jrf-materials.html",
+      "NET JRF": "net-jrf-materials.html"
+    };
+
+    clone.querySelectorAll(".student-card").forEach(card => {
+
+      const titleElement = card.querySelector("h3");
+      const loginLink = card.querySelector('a[href="login.html"]');
+
+      if(!titleElement || !loginLink) return;
+
+      const title = titleElement.textContent
+        .replace(/[^a-zA-Z0-9- ]/g, "")
+        .trim()
+        .toUpperCase();
+
+      let target = null;
+
+      if(title.includes("UPSC")) target = "upsc-materials.html";
+      else if(title.includes("UPPCS")) target = "uppcs-materials.html";
+      else if(title.includes("SSC")) target = "ssc-materials.html";
+      else if(
+        title.includes("IBPS") ||
+        title.includes("SBI") ||
+        title.includes("RBI") ||
+        title.includes("BANK")
+      ) target = "banking-materials.html";
+      else if(title.includes("RRB") || title.includes("RAILWAY"))
+        target = "railway-materials.html";
+      else if(title.includes("NET") || title.includes("JRF"))
+        target = "net-jrf-materials.html";
+      else if(title === "BA" || title.includes("BA "))
+        target = "ba-materials.html";
+      else if(title === "MA" || title.includes("MA "))
+        target = "ma-materials.html";
+
+      /*
+        जिन cards का अभी अलग materials page नहीं है,
+        उनमें फिलहाल Login बना रहेगा।
+      */
+      if(target){
+
+        loginLink.href = target;
+        loginLink.textContent = "🔓 Open Materials →";
+        loginLink.classList.add("open");
+        loginLink.removeAttribute("onclick");
+
+      }
+
+    });
+
     console.log(
-      "✅ सभी Student sections dashboard में load हो गए।"
+      "✅ Dashboard exam cards में सही Open links लगा दिए गए।"
     );
 
   }catch(error){
