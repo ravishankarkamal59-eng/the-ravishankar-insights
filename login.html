@@ -447,6 +447,8 @@ headers:{
 "application/json"
 },
 
+credentials: "include",
+
 body:JSON.stringify({
 
 name:name,
@@ -620,6 +622,11 @@ localStorage.setItem(
   "true"
 );
 
+localStorage.setItem(
+  "studentSession",
+  data.studentSession
+);
+
 message(
 "🎉 Registration सफल हो गया! Dashboard खुल रहा है...",
 "green"
@@ -695,6 +702,8 @@ headers:{
 "Content-Type":
 "application/json"
 },
+
+credentials: "include",
 
 body:JSON.stringify({
 

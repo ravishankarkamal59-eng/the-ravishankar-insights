@@ -1515,7 +1515,26 @@ if(loggedIn !== "true"){
 
 /* LOGOUT */
 
-function logout(){
+async function logout(){
+
+  try {
+
+    await fetch(
+      API + "/api/student/logout",
+      {
+        method: "POST",
+        credentials: "include"
+      }
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Logout request failed:",
+      error
+    );
+
+  }
 
   localStorage.removeItem(
     "studentLoggedIn"
@@ -1524,7 +1543,6 @@ function logout(){
   localStorage.removeItem(
     "studentUser"
   );
-
 
   window.location.href =
     "login.html";
