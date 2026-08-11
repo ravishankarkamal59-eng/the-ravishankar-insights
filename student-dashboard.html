@@ -1133,7 +1133,75 @@ Open All Materials →
       "BANKING": "banking-materials.html",
       "RAILWAY": "railway-materials.html",
       "NET-JRF": "net-jrf-materials.html",
-      "NET JRF": "net-jrf-materials.html"
+      "NET JRF": "net-jrf-materials.html",
+
+      "TEACHING": "teaching-materials.html",
+      "CTET": "teaching-materials.html",
+      "TET": "teaching-materials.html",
+      "TGT": "teaching-materials.html",
+      "PGT": "teaching-materials.html",
+
+      "RESEARCH": "research-materials.html",
+      "UGC NET": "research-materials.html",
+
+      "ENGINEERING": "engineering-materials.html",
+      "JEE MAIN": "engineering-materials.html",
+      "JEE ADVANCED": "engineering-materials.html",
+
+      "MEDICAL": "medical-materials.html",
+      "NEET UG": "medical-materials.html",
+      "NEET PG": "medical-materials.html",
+
+      "UNIVERSITY LAW": "university-law-materials.html",
+      "CUET UG": "university-law-materials.html",
+      "CUET PG": "university-law-materials.html",
+      "AIBE": "university-law-materials.html",
+
+      "UP GOVERNMENT": "up-government-materials.html",
+      "UPSSSC PET": "up-government-materials.html",
+      "UPSSSC": "up-government-materials.html",
+      "UP POLICE": "up-government-materials.html",
+      "UP JUDICIARY": "up-government-materials.html",
+
+      "INSURANCE": "insurance-materials.html",
+      "LIC": "insurance-materials.html",
+      "EPFO": "insurance-materials.html",
+      "ESIC": "insurance-materials.html",
+      "FCI": "insurance-materials.html",
+
+      "LAW PROFESSIONAL": "law-professional-materials.html",
+      "CLAT": "law-professional-materials.html",
+      "AILET": "law-professional-materials.html",
+
+      "POLICE DEFENCE": "police-defence-materials.html",
+      "SSC GD": "police-defence-materials.html",
+      "STATE POLICE": "police-defence-materials.html",
+      "DEFENCE EXAMS": "police-defence-materials.html",
+
+      "CIVIL DEFENCE": "civil-defence-materials.html",
+      "UPSC CSE": "civil-defence-materials.html",
+      "CDS": "civil-defence-materials.html",
+      "NDA": "civil-defence-materials.html",
+      "UPSC CMS": "civil-defence-materials.html",
+
+      "STATE PSC": "state-psc-materials.html",
+
+      "BANKING EXAMS": "banking-exams-materials.html",
+      "IBPS PO": "banking-exams-materials.html",
+      "IBPS CLERK": "banking-exams-materials.html",
+      "IBPS RRB": "banking-exams-materials.html",
+      "SBI PO": "banking-exams-materials.html",
+      "SBI CLERK": "banking-exams-materials.html",
+      "RBI": "banking-exams-materials.html",
+
+      "RAILWAY EXAMS": "railway-exams-materials.html",
+      "RRB NTPC": "railway-exams-materials.html",
+      "RRB GROUP D": "railway-exams-materials.html",
+      "RRB ALP": "railway-exams-materials.html",
+      "RRB TECHNICIAN": "railway-exams-materials.html",
+
+      "ARMED FORCES": "armed-forces-materials.html",
+      "AGNIVEER": "armed-forces-materials.html"
     };
 
     clone.querySelectorAll(".student-card").forEach(card => {
@@ -1150,35 +1218,18 @@ Open All Materials →
 
       let target = null;
 
-      if(title.includes("UPSC")) target = "upsc-materials.html";
-      else if(title.includes("UPPCS")) target = "uppcs-materials.html";
-      else if(title.includes("SSC")) target = "ssc-materials.html";
-      else if(
-        title.includes("IBPS") ||
-        title.includes("SBI") ||
-        title.includes("RBI") ||
-        title.includes("BANK")
-      ) target = "banking-materials.html";
-      else if(title.includes("RRB") || title.includes("RAILWAY"))
-        target = "railway-materials.html";
-      else if(title.includes("NET") || title.includes("JRF"))
-        target = "net-jrf-materials.html";
-      else if(title === "BA" || title.includes("BA "))
-        target = "ba-materials.html";
-      else if(title === "MA" || title.includes("MA "))
-        target = "ma-materials.html";
+      for(const key in materialMap){
+        if(title === key || title.includes(key)){
+          target = materialMap[key];
+          break;
+        }
+      }
 
-      /*
-        जिन cards का अभी अलग materials page नहीं है,
-        उनमें फिलहाल Login बना रहेगा।
-      */
       if(target){
-
         loginLink.href = target;
         loginLink.textContent = "🔓 Open Materials →";
         loginLink.classList.add("open");
         loginLink.removeAttribute("onclick");
-
       }
 
     });
