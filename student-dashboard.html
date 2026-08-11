@@ -652,6 +652,12 @@ Open All Materials →
       const link = copy.querySelector("a");
 
       if (link) {
+        const original = link.getAttribute("href");
+
+        if (original && original !== "#") {
+          link.href = original;
+        }
+
         link.textContent = "📚 Open Section";
       }
 
