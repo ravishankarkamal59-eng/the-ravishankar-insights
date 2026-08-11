@@ -145,6 +145,7 @@ footer{
   }
 }
 </style>
+<style>.admin-only{display:none !important;}</style>
 </head>
 
 <body>
@@ -430,6 +431,53 @@ function showFile(input, outputId){
 
 }
 
+</script>
+
+
+<script>
+const API = "https://ravishankar-insights-backend-1.onrender.com";
+
+async function loadNETJRFMaterials() {
+  try {
+    const response = await fetch(API + "/api/materials/net-jrf");
+    const data = await response.json();
+
+    if (!data.success) return;
+
+    const pdfButtons = document.querySelectorAll(".pdf");
+
+    if (!data.files || data.files.length === 0) {
+      pdfButtons.forEach(btn => {
+        btn.textContent = "📄 PDF अभी उपलब्ध नहीं";
+        btn.disabled = true;
+      });
+      return;
+    }
+
+    const pdfFiles = data.files.filter(file =>
+      file.name.toLowerCase().endsWith(".pdf")
+    );
+
+    pdfButtons.forEach(btn => {
+      if (pdfFiles.length > 0) {
+        btn.onclick = () => {
+          window.open(API + pdfFiles[0].url, "_blank");
+        };
+      } else {
+        btn.textContent = "📄 PDF अभी उपलब्ध नहीं";
+        btn.disabled = true;
+      }
+    });
+
+  } catch (error) {
+    console.error("net-jrf materials error:", error);
+  }
+}
+
+document.addEventListener(
+  "DOMContentLoaded",
+  loadNETJRFMaterials
+);
 </script>
 
 </body>
