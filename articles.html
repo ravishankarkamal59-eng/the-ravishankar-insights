@@ -129,10 +129,26 @@ async function loadArticles(){
 
     articlesBox.innerHTML = "";
 
-    data.articles
+    const requestedId =
+      new URLSearchParams(window.location.search).get("id");
+
+    let articlesToShow = data.articles
       .slice()
-      .reverse()
-      .forEach(article => {
+      .reverse();
+
+    if(requestedId){
+      articlesToShow = data.articles.filter(
+        article => String(article.id) === String(requestedId)
+      );
+    }
+
+    if(requestedId && articlesToShow.length === 0){
+      articlesBox.innerHTML =
+        '<div class="message">❌ यह Article उपलब्ध नहीं है।</div>';
+      return;
+    }
+
+    articlesToShow.forEach(article => {
 
         const card =
           document.createElement("div");
