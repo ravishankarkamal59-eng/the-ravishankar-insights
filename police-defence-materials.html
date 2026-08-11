@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Police & Defence | The Ravishankar Insights</title>
+
+<style>
+body{
+  font-family:Arial,sans-serif;
+  margin:0;
+  padding:20px;
+  background:#f4f7fb;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+}
+
+h1{
+  text-align:center;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  margin:18px 0;
+  border-radius:15px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+button{
+  padding:10px 15px;
+  margin:5px;
+  border:0;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.pdf{
+  background:#e8f0ff;
+}
+
+.admin-only{
+  display:none !important;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>👮 Police & Defence Exams</h1>
+
+<div class="card">
+<h2>👮 SSC GD</h2>
+<p>SSC GD Constable preparation materials.</p>
+
+<button class="pdf">📄 Open PDF</button>
+<button class="admin-only">🔐 Admin PDF Upload</button>
+<button class="admin-only">🎥 Admin Video Upload</button>
+</div>
+
+<div class="card">
+<h2>👮 State Police</h2>
+<p>Police Constable और SI परीक्षा सामग्री.</p>
+
+<button class="pdf">📄 Open PDF</button>
+<button class="admin-only">🔐 Admin PDF Upload</button>
+<button class="admin-only">🎥 Admin Video Upload</button>
+</div>
+
+<div class="card">
+<h2>🎖️ Defence Exams</h2>
+<p>Army • Navy • Air Force preparation materials.</p>
+
+<button class="pdf">📄 Open PDF</button>
+<button class="admin-only">🔐 Admin PDF Upload</button>
+<button class="admin-only">🎥 Admin Video Upload</button>
+</div>
+
+</div>
+
+<script>
+const API = "https://ravishankar-insights-backend-1.onrender.com";
+
+async function loadPoliceDefenceMaterials(){
+
+  try{
+
+    const response =
+      await fetch(API + "/api/materials/police-defence");
+
+    const data = await response.json();
+
+    if(!data.success) return;
+
+    const pdfFiles =
+      (data.files || []).filter(file =>
+        file.name.toLowerCase().endsWith(".pdf")
+      );
+
+    const buttons =
+      document.querySelectorAll(".pdf");
+
+    buttons.forEach((button,index)=>{
+
+      if(pdfFiles[index]){
+
+        button.textContent = "📄 Open PDF";
+
+        button.onclick = () => {
+          window.open(
+            API + pdfFiles[index].url,
+            "_blank"
+          );
+        };
+
+      }else{
+
+        button.textContent = "📄 PDF अभी उपलब्ध नहीं";
+        button.disabled = true;
+
+      }
+
+    });
+
+  }catch(error){
+
+    console.error(
+      "Police & Defence materials error:",
+      error
+    );
+
+  }
+
+}
+
+document.addEventListener(
+  "DOMContentLoaded",
+  loadPoliceDefenceMaterials
+);
+</script>
+
+</body>
+</html>
