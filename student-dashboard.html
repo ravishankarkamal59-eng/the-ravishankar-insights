@@ -624,6 +624,55 @@ Open All Materials →
 </section>
 
 
+
+<!-- AUTO CENTRAL SECTIONS -->
+<section id="centralSections" style="margin-top:30px;">
+  <h2 style="margin-bottom:18px;">📚 All Study Sections</h2>
+  <div id="centralSectionGrid" class="grid"></div>
+</section>
+
+<script>
+(async function loadCentralSections(){
+
+  const grid = document.getElementById("centralSectionGrid");
+
+  try {
+
+    const response = await fetch("index.html");
+    const html = await response.text();
+
+    const doc = new DOMParser().parseFromString(html, "text/html");
+
+    const cards = doc.querySelectorAll(".student-card");
+
+    cards.forEach(card => {
+
+      const copy = card.cloneNode(true);
+
+      const link = copy.querySelector("a");
+
+      if (link) {
+        link.href = "login.html";
+        link.textContent = "📚 Open Section";
+      }
+
+      grid.appendChild(copy);
+
+    });
+
+    if (!cards.length) {
+      document.getElementById("centralSections").style.display = "none";
+    }
+
+  } catch(error) {
+
+    console.error("Central sections error:", error);
+
+  }
+
+})();
+</script>
+
 </main>
 
 
