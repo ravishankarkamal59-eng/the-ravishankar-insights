@@ -228,93 +228,25 @@ footer{
    ADMIN ARTICLE PREMIUM CARDS
    ========================================== */
 
-.admin-article-card{
-  position:relative;
-  overflow:hidden;
-  background:linear-gradient(145deg,#ffffff,#f5f9ff);
-  padding:24px;
-  border-radius:22px;
-  border:1px solid rgba(37,99,235,.10);
-  box-shadow:0 12px 30px rgba(15,23,42,.10);
-  transition:transform .25s ease,box-shadow .25s ease;
-}
 
-.admin-article-card::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  height:5px;
-  background:linear-gradient(90deg,#2563eb,#7c3aed,#06b6d4);
-}
 
-.admin-article-card:hover{
-  transform:translateY(-7px);
-  box-shadow:0 20px 40px rgba(37,99,235,.18);
-}
 
-.admin-article-icon{
-  width:52px;
-  height:52px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:16px;
-  background:linear-gradient(135deg,#2563eb,#7c3aed);
-  color:white;
-  font-size:25px;
-  margin-bottom:15px;
-  box-shadow:0 8px 18px rgba(37,99,235,.22);
-}
 
-.admin-article-category{
-  display:inline-block;
-  padding:5px 10px;
-  border-radius:999px;
-  background:#eff6ff;
-  color:#2563eb;
-  font-size:12px;
-  font-weight:bold;
-  margin-bottom:10px;
-}
 
-.admin-article-card h3{
-  color:#172033;
-  font-size:19px;
-  line-height:1.35;
-  margin-bottom:9px;
-}
 
-.admin-article-card p{
-  color:#64748b;
-  line-height:1.55;
-  min-height:48px;
-}
 
-.admin-article-button{
-  display:block;
-  margin-top:17px;
-  padding:12px 15px;
-  border-radius:12px;
-  text-align:center;
-  text-decoration:none;
-  color:white;
-  font-weight:bold;
-  background:linear-gradient(135deg,#2563eb,#4f46e5);
-  transition:.2s;
-}
 
-.admin-article-button:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 18px rgba(37,99,235,.25);
-}
 
-.admin-article-date{
-  margin-top:12px;
-  color:#94a3b8;
-  font-size:12px;
-}
+
+
+
+
+
+
+
+
+
+
 
 
 /* ==========================================
@@ -333,19 +265,119 @@ footer{
   gap:22px;
 }
 
-#adminArticleGrid .admin-article-card{
+#adminArticleGrid 
+
+#adminArticleGrid 
+
+#adminArticleGrid 
+
+#adminArticleGrid 
+
+#adminArticleGrid 
+
+#adminArticleGrid 
+
+#adminArticleGrid 
+
+#adminArticleGrid 
+
+#adminArticleGrid 
+
+#adminArticleGrid 
+
+@media(max-width:900px){
+  #adminArticleGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:600px){
+  #adminArticleGrid{
+    grid-template-columns:1fr;
+  }
+}
+
+
+/* ADMIN ARTICLE GRID FIX */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:600px){
+  
+}
+
+
+/* ==========================================
+   ADMIN ARTICLE PREMIUM DESIGN
+   ========================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:600px){
+  
+}
+
+
+/* ===== FINAL ADMIN ARTICLE DESIGN ===== */
+
+.admin-article-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:22px;
+  margin-top:25px;
+}
+
+.admin-article-card{
   position:relative;
   overflow:hidden;
-  background:linear-gradient(145deg,#ffffff,#f5f9ff);
+  background:linear-gradient(145deg,#fff,#f5f9ff);
   padding:24px;
   border-radius:22px;
   border:1px solid rgba(37,99,235,.12);
   box-shadow:0 12px 30px rgba(15,23,42,.10);
-  transition:transform .25s ease,box-shadow .25s ease;
-  min-width:0;
+  transition:.25s ease;
 }
 
-#adminArticleGrid .admin-article-card::before{
+.admin-article-card::before{
   content:"";
   position:absolute;
   top:0;
@@ -355,26 +387,26 @@ footer{
   background:linear-gradient(90deg,#2563eb,#7c3aed,#06b6d4);
 }
 
-#adminArticleGrid .admin-article-card:hover{
+.admin-article-card:hover{
   transform:translateY(-7px);
   box-shadow:0 20px 40px rgba(37,99,235,.18);
 }
 
-#adminArticleGrid .admin-article-icon{
-  width:52px;
-  height:52px;
+.admin-article-icon{
+  width:54px;
+  height:54px;
   display:flex;
   align-items:center;
   justify-content:center;
   border-radius:16px;
   background:linear-gradient(135deg,#2563eb,#7c3aed);
-  color:white;
-  font-size:25px;
+  color:#fff;
+  font-size:26px;
   margin-bottom:15px;
   box-shadow:0 8px 18px rgba(37,99,235,.22);
 }
 
-#adminArticleGrid .admin-article-category{
+.admin-article-category{
   display:inline-block;
   padding:5px 10px;
   border-radius:999px;
@@ -385,54 +417,45 @@ footer{
   margin-bottom:10px;
 }
 
-#adminArticleGrid .admin-article-card h3{
+.admin-article-card h3{
   color:#172033;
   font-size:19px;
   line-height:1.4;
-  margin:0 0 9px;
+  margin:5px 0 10px;
 }
 
-#adminArticleGrid .admin-article-card p{
+.admin-article-card p{
   color:#64748b;
-  line-height:1.55;
-  min-height:48px;
-  margin:0;
+  line-height:1.6;
+  min-height:50px;
 }
 
-#adminArticleGrid .admin-article-button{
-  display:block !important;
+.admin-article-button{
+  display:block;
   width:100%;
-  margin-top:17px;
+  margin-top:18px;
   padding:12px 15px;
   border-radius:12px;
   text-align:center;
-  text-decoration:none !important;
-  color:#ffffff !important;
-  background:linear-gradient(135deg,#2563eb,#4f46e5) !important;
-  font-weight:bold;
-  cursor:pointer;
-  transition:.2s;
+  text-decoration:none;
+  color:#fff !important;
+  background:linear-gradient(135deg,#2563eb,#4f46e5);
+  font-weight:700;
+  box-shadow:0 7px 16px rgba(37,99,235,.20);
 }
 
-#adminArticleGrid .admin-article-button:hover{
+.admin-article-button:hover{
   transform:translateY(-2px);
-  box-shadow:0 8px 18px rgba(37,99,235,.25);
 }
 
-#adminArticleGrid .admin-article-date{
+.admin-article-date{
   margin-top:12px;
   color:#94a3b8;
   font-size:12px;
 }
 
-@media(max-width:900px){
-  #adminArticleGrid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-}
-
 @media(max-width:600px){
-  #adminArticleGrid{
+  .admin-article-grid{
     grid-template-columns:1fr;
   }
 }
@@ -953,7 +976,7 @@ Open All Materials →
     </p>
   </div>
 
-  <div id="adminArticleGrid" class="grid"></div>
+  <div id="adminArticleGrid" class="admin-article-grid"></div>
 
 </section>
 
