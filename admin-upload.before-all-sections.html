@@ -145,20 +145,6 @@ button:disabled{
 <option value="railway">Railway</option>
 <option value="ssc">SSC</option>
 <option value="banking">Banking</option>
-<option value="teaching">Teaching & Education</option>
-<option value="armed-forces">Armed Forces</option>
-<option value="railway-exams">Railway Exams</option>
-<option value="banking-exams">Banking Exams</option>
-<option value="state-psc">State PSC</option>
-<option value="civil-defence">Civil Defence</option>
-<option value="law-professional">Law & Professional Exams</option>
-<option value="insurance">Insurance</option>
-<option value="up-government">UP Government Exams</option>
-<option value="university-law">University & Law</option>
-<option value="medical">Medical</option>
-<option value="engineering">Engineering</option>
-<option value="research">Research</option>
-<option value="police-defence">Police & Defence</option>
 
 </select>
 
@@ -191,25 +177,6 @@ accept="application/pdf,video/mp4,video/webm,video/quicktime"
 const API =
 "https://ravishankar-insights-backend-1.onrender.com";
 
-
-// ADMIN SECTION AUTO SELECT
-(function () {
-  const params = new URLSearchParams(window.location.search);
-  const section = params.get("section");
-
-  if (section) {
-    const select = document.getElementById("uploadSection");
-
-    if (select) {
-      const option = Array.from(select.options)
-        .find(o => o.value === section);
-
-      if (option) {
-        select.value = section;
-      }
-    }
-  }
-})();
 
 async function uploadMaterial(){
 

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏛️ State PSC | The Ravishankar Insights</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f7fb;margin:0;color:#172033}
+header{padding:25px;text-align:center;background:#172033;color:white}
+.container{max-width:1000px;margin:25px auto;padding:15px}
+.card{background:white;border-radius:16px;padding:20px;margin:18px 0;box-shadow:0 5px 18px #0001}
+button{padding:10px 16px;margin:6px;border:0;border-radius:8px;cursor:pointer}
+.pdf{background:#e8f1ff}
+.video{background:#eee}
+.admin-only{display:none!important}
+.files a{display:block;margin:8px 0;padding:10px;background:#f1f5f9;border-radius:8px;color:#174ea6}
+.status{margin:10px 0;font-weight:bold}
+</style>
+</head>
+<body>
+<header>
+<h1>🏛️ State PSC</h1>
+<p>The Ravishankar Insights — Study Materials</p>
+</header>
+<div class="container">
+<div id="materials"></div>
+</div>
+
+<script>
+const API = "https://ravishankar-insights-backend-1.onrender.com";
+
+async function loadMaterials(){
+  const box = document.getElementById("materials");
+
+  try{
+    const response = await fetch(API + "/api/materials/state-psc");
+    const data = await response.json();
+
+    const files = data.files || [];
+
+    box.innerHTML = "";
+
+    const cards = [["🏛️ State PSC", "State Public Service Commission Exams"]];
+
+    cards.forEach((item, index) => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      let html = `
+        <h2>${item[0]}</h2>
+        <p>${item[1]}</p>
+        <button class="pdf" onclick="openPDF()">📄 Open PDF</button>
+        <button class="video admin-only">🎥 Admin Video Upload</button>
+        <div class="files" id="files-${index}"></div>
+      `;
+
+      card.innerHTML = html;
+      box.appendChild(card);
+
+      const fileBox = card.querySelector(".files");
+
+      if(files.length){
+        files.forEach(file => {
+          const a = document.createElement("a");
+          a.href = API + file.url;
+          a.target = "_blank";
+          a.textContent = "📄 " + file.name;
+          fileBox.appendChild(a);
+        });
+      } else {
+        fileBox.innerHTML = "<p>📚 अभी material upload नहीं किया गया है।</p>";
+      }
+    });
+  }catch(error){
+    box.innerHTML = "<p>❌ Materials load नहीं हो पाए।</p>";
+    console.error(error);
+  }
+}
+
+function openPDF(){
+  fetch(API + "/api/materials/state-psc")
+    .then(r => r.json())
+    .then(data => {
+      if(data.files && data.files.length){
+        window.open(API + data.files[0].url, "_blank");
+      }else{
+        alert("अभी PDF उपलब्ध नहीं है।");
+      }
+    });
+}
+
+loadMaterials();
+</script>
+
+</body>
+</html>

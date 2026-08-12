@@ -192,25 +192,6 @@ const API =
 "https://ravishankar-insights-backend-1.onrender.com";
 
 
-// ADMIN SECTION AUTO SELECT
-(function () {
-  const params = new URLSearchParams(window.location.search);
-  const section = params.get("section");
-
-  if (section) {
-    const select = document.getElementById("uploadSection");
-
-    if (select) {
-      const option = Array.from(select.options)
-        .find(o => o.value === section);
-
-      if (option) {
-        select.value = section;
-      }
-    }
-  }
-})();
-
 async function uploadMaterial(){
 
   const file =

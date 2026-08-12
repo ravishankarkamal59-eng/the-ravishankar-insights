@@ -86,7 +86,6 @@ button{
   background:#e67e22;
 }
 </style>
-<style>.admin-only{display:none !important;}</style>
 </head>
 
 <body>
@@ -107,8 +106,8 @@ button{
 <h3>IBPS PO</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -116,8 +115,8 @@ button{
 <h3>IBPS Clerk</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -125,8 +124,8 @@ button{
 <h3>IBPS RRB Office Assistant</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -134,8 +133,8 @@ button{
 <h3>IBPS RRB Officer Scale I</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -152,8 +151,8 @@ button{
 <h3>SBI PO</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -161,8 +160,8 @@ button{
 <h3>SBI Clerk</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -179,8 +178,8 @@ button{
 <h3>RBI Grade B</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -188,8 +187,8 @@ button{
 <h3>RBI Assistant</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -206,8 +205,8 @@ button{
 <h3>NABARD Grade A</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -224,8 +223,8 @@ button{
 <h3>SEBI Grade A</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -242,62 +241,14 @@ button{
 <h3>Banking General Preparation</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
 </div>
 
 </div>
-
-
-<script>
-const API = "https://ravishankar-insights-backend-1.onrender.com";
-
-async function loadBANKINGMaterials() {
-  try {
-    const response = await fetch(API + "/api/materials/banking");
-    const data = await response.json();
-
-    if (!data.success) return;
-
-    const pdfButtons = document.querySelectorAll(".pdf");
-
-    if (!data.files || data.files.length === 0) {
-      pdfButtons.forEach(btn => {
-        btn.textContent = "📄 PDF अभी उपलब्ध नहीं";
-        btn.disabled = true;
-      });
-      return;
-    }
-
-    const pdfFiles = data.files.filter(file =>
-      file.name.toLowerCase().endsWith(".pdf")
-    );
-
-    pdfButtons.forEach(btn => {
-      if (pdfFiles.length > 0) {
-        btn.onclick = () => {
-          window.open(API + pdfFiles[0].url, "_blank");
-        };
-      } else {
-        btn.textContent = "📄 PDF अभी उपलब्ध नहीं";
-        btn.disabled = true;
-      }
-    });
-
-  } catch (error) {
-    console.error("banking materials error:", error);
-  }
-}
-
-document.addEventListener(
-  "DOMContentLoaded",
-  loadBANKINGMaterials
-);
-</script>
-
 
 </body>
 </html>

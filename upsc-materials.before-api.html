@@ -87,13 +87,6 @@ button{
   background:#e67e22;
 }
 </style>
-
-<style>
-.admin-only{
-  display:none !important;
-}
-</style>
-
 </head>
 
 <body>
@@ -114,8 +107,8 @@ button{
 <h3>Paper 1 — General Studies</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -123,8 +116,8 @@ button{
 <h3>Paper 2 — CSAT</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -141,8 +134,8 @@ button{
 <h3>Paper A — Indian Language</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -150,8 +143,8 @@ button{
 <h3>Paper B — English</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -159,8 +152,8 @@ button{
 <h3>Essay</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -168,8 +161,8 @@ button{
 <h3>GS Paper 1 — Indian Heritage & Culture</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -177,8 +170,8 @@ button{
 <h3>GS Paper 2 — Governance & Constitution</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -186,8 +179,8 @@ button{
 <h3>GS Paper 3 — Economy, Science & Technology</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -195,8 +188,8 @@ button{
 <h3>GS Paper 4 — Ethics & Integrity</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -204,8 +197,8 @@ button{
 <h3>Optional Subject — Paper 1</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
@@ -213,65 +206,14 @@ button{
 <h3>Optional Subject — Paper 2</h3>
 <div class="buttons">
 <button class="pdf">📄 Open PDF</button>
-<button class="upload-pdf admin-only">🔐 Admin PDF Upload</button>
-<button class="video admin-only">🎥 Admin Video Upload</button>
+<button class="upload-pdf">🔐 Admin PDF Upload</button>
+<button class="video">🎥 Admin Video Upload</button>
 </div>
 </div>
 
 </div>
 
 </div>
-
-
-<script>
-const API = "https://ravishankar-insights-backend-1.onrender.com";
-
-async function loadUPSCMaterials() {
-  try {
-    const response = await fetch(API + "/api/materials/upsc");
-    const data = await response.json();
-
-    if (!data.success) return;
-
-    const pdfButtons = document.querySelectorAll(".pdf");
-
-    if (!data.files || data.files.length === 0) {
-      pdfButtons.forEach(btn => {
-        btn.textContent = "📄 PDF अभी उपलब्ध नहीं";
-        btn.disabled = true;
-      });
-      return;
-    }
-
-    pdfButtons.forEach(btn => {
-      const card = btn.closest(".card");
-      if (!card) return;
-
-      const files = data.files.filter(file =>
-        file.name.toLowerCase().endsWith(".pdf")
-      );
-
-      if (files.length > 0) {
-        btn.onclick = () => {
-          window.open(
-            API + files[0].url,
-            "_blank"
-          );
-        };
-      } else {
-        btn.textContent = "📄 PDF अभी उपलब्ध नहीं";
-        btn.disabled = true;
-      }
-    });
-
-  } catch (error) {
-    console.error("UPSC materials error:", error);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", loadUPSCMaterials);
-</script>
-
 
 </body>
 </html>
