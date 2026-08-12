@@ -703,6 +703,52 @@ body.route-home .founder-section{
 
 </style>
 
+
+<style id="restore-home-content">
+/* =========================================
+   RESTORE EXISTING HOMEPAGE CONTENT
+   Premium top को रखते हुए नीचे का content वापस
+   ========================================= */
+
+body.route-home #about,
+body.route-home #student,
+body.route-home #updates,
+body.route-home #contact,
+body.route-home #syllabus,
+body.route-home .student-section,
+body.route-home .syllabus-section,
+body.route-home .home-guidance,
+body.route-home .notice{
+  display:block!important;
+}
+
+/* Existing study-material cards वापस */
+body.route-home .cards{
+  display:grid!important;
+  visibility:visible!important;
+  height:auto!important;
+  min-height:0!important;
+  padding:20px 6% 70px!important;
+  margin:0!important;
+  overflow:visible!important;
+}
+
+/* Old duplicate founder बिल्कुल नहीं */
+body.route-home > .founder-section{
+  display:none!important;
+}
+
+/* Premium top हमेशा सबसे ऊपर */
+body.route-home .premium-top{
+  display:block!important;
+}
+
+/* पुराने automatic banner को वापस नहीं लाना */
+body.route-home .top-banner-area{
+  display:none!important;
+}
+</style>
+
 </head>
 
 <body>
