@@ -211,6 +211,150 @@ footer{
     min-height:80vh;
   }
 }
+
+/* =========================================
+   PREMIUM HOMEPAGE TOP
+   ========================================= */
+
+.premium-top{
+  background:
+    radial-gradient(circle at 50% 0%,rgba(46,125,210,.22),transparent 38%),
+    linear-gradient(180deg,#06152d 0%,#0b2c52 45%,#f7faff 45%,#ffffff 100%);
+  text-align:center;
+  padding-bottom:65px;
+}
+
+.premium-banner{
+  padding:55px 20px 42px;
+  color:white;
+  position:relative;
+  overflow:hidden;
+}
+
+.premium-small{
+  font-size:12px;
+  letter-spacing:5px;
+  font-weight:700;
+  opacity:.8;
+  margin-bottom:14px;
+}
+
+.premium-banner h1{
+  font-size:clamp(32px,7vw,72px);
+  line-height:1.05;
+  letter-spacing:2px;
+  margin:0;
+  font-weight:900;
+  text-shadow:0 8px 30px rgba(0,0,0,.35);
+}
+
+.premium-banner p{
+  margin-top:18px;
+  font-size:15px;
+  letter-spacing:4px;
+  opacity:.9;
+}
+
+.premium-line{
+  width:90px;
+  height:3px;
+  margin:0 auto 25px;
+  border-radius:20px;
+  background:linear-gradient(90deg,transparent,#fff,transparent);
+}
+
+.premium-line:last-child{
+  margin:25px auto 0;
+}
+
+.premium-founder{
+  width:min(330px,86%);
+  margin:-2px auto 0;
+  padding:28px 20px 22px;
+  background:rgba(255,255,255,.96);
+  border-radius:28px;
+  box-shadow:0 18px 55px rgba(7,26,53,.22);
+  position:relative;
+  z-index:2;
+}
+
+.premium-founder img{
+  width:145px;
+  height:145px;
+  object-fit:cover;
+  border-radius:50%;
+  border:6px solid white;
+  box-shadow:0 8px 30px rgba(0,0,0,.2);
+}
+
+.premium-founder-name{
+  margin-top:15px;
+  font-size:25px;
+  font-weight:800;
+  color:#092e57;
+}
+
+.premium-founder-role{
+  margin-top:5px;
+  font-size:13px;
+  color:#65748a;
+  letter-spacing:.5px;
+}
+
+.premium-intro{
+  width:min(850px,90%);
+  margin:32px auto 0;
+  padding:28px 25px;
+}
+
+.intro-badge{
+  display:inline-block;
+  padding:9px 18px;
+  border-radius:30px;
+  background:#eaf3ff;
+  color:#1261c9;
+  font-size:14px;
+  font-weight:700;
+}
+
+.premium-intro h2{
+  margin:18px 0 12px;
+  font-size:clamp(28px,5vw,42px);
+  color:#0a3566;
+}
+
+.premium-intro p{
+  max-width:720px;
+  margin:auto;
+  line-height:1.9;
+  font-size:17px;
+  color:#526176;
+}
+
+@media(max-width:600px){
+  .premium-banner{
+    padding-top:42px;
+  }
+
+  .premium-banner h1{
+    letter-spacing:1px;
+  }
+
+  .premium-founder{
+    padding-top:24px;
+  }
+
+  .premium-founder img{
+    width:125px;
+    height:125px;
+  }
+
+  .premium-intro{
+    padding-left:10px;
+    padding-right:10px;
+  }
+}
+
 </style>
 <style>
 .slider-section{padding:35px 6%;background:#f5f7fb}
@@ -515,6 +659,50 @@ a[href*="/admin"]{
 }
 </style>
 
+
+<style id="premium-final-fix">
+
+/* =========================================
+   PREMIUM TOP — FINAL
+   ========================================= */
+
+body.route-home .premium-top{
+  display:block!important;
+}
+
+/* पुराने founder section को पूरी तरह बंद */
+body.route-home > .founder-section{
+  display:none!important;
+}
+
+/* पुराने automatic banner system को बंद */
+body.route-home .top-banner-area{
+  display:none!important;
+}
+
+/* Premium banner mobile/desktop */
+.premium-top{
+  width:100%;
+  overflow:hidden;
+}
+
+.premium-banner h1{
+  word-break:normal;
+}
+
+/* Founder photo सिर्फ premium section में */
+.premium-founder img{
+  display:block;
+  margin:0 auto;
+}
+
+/* बाकी existing website में founder image accidentally दिखाई न दे */
+body.route-home .founder-section{
+  display:none!important;
+}
+
+</style>
+
 </head>
 
 <body>
@@ -552,14 +740,26 @@ a[href*="/admin"]{
   <a href="#syllabus">📚 Syllabus</a>
 </div>
 
-<section class="hero">
+<!-- PREMIUM HOMEPAGE TOP -->
+<section class="premium-top">
 
-  <div>
+  <div class="premium-banner">
+    <div class="premium-line"></div>
+    <div class="premium-small">WELCOME TO</div>
+    <h1>THE RAVISHANKAR INSIGHTS</h1>
+    <p>Education • Knowledge • Success</p>
+    <div class="premium-line"></div>
+  </div>
 
-    <h1>Welcome to<br>The Ravishankar Insights</h1>
+  <div class="premium-founder">
+    <img src="images/founder.jpg" alt="Ravishankar - Founder">
+    <div class="premium-founder-name">Ravishankar</div>
+    <div class="premium-founder-role">Founder & Educational Platform</div>
+  </div>
 
-    <h2>📖 शिक्षा • अध्ययन • सफलता</h2>
-
+  <div class="premium-intro">
+    <div class="intro-badge">📚 शिक्षा • अध्ययन • सफलता</div>
+    <h2>आपका स्वागत है</h2>
     <p>
       The Ravishankar Insights में आपका स्वागत है।
       यहाँ विभिन्न courses, competitive examinations,
@@ -567,27 +767,10 @@ a[href*="/admin"]{
       उपलब्ध हैं।
     </p>
 
-    <div class="founder">
-      <img
-        class="founder-photo"
-        src="images/founder.jpg"
-        alt="Founder">
-      <div>
-        <strong>Founder</strong><br>
-        Ravishankar
-      </div>
-    </div>
-
     <div class="buttons">
-      <a class="btn login-btn" href="login.html">
-        🔐 Student Login
-      </a>
-
-      <a class="btn syllabus-btn" href="#syllabus">
-        📚 Syllabus
-      </a>
+      <a class="btn login-btn" href="login.html">🔐 Student Login</a>
+      <a class="btn syllabus-btn" href="#syllabus">📚 Syllabus</a>
     </div>
-
   </div>
 
 </section>
@@ -865,17 +1048,7 @@ Student Login/Register करें।
   Study Material देखने के लिए Student Login/Register करें।
 </section>
 
-<section class="founder-section">
-<div class="founder-card">
-<img src="images/founder.jpg" alt="Founder - Ravishankar">
-<div class="founder-text">
-<span>THE RAVISHANKAR INSIGHTS</span>
-<h2>Ravishankar</h2>
-<h3>Founder & Educational Platform</h3>
-<p>विद्यार्थियों के लिए अध्ययन सामग्री, पाठ्यक्रम, नोट्स और परीक्षा तैयारी को एक ही स्थान पर उपलब्ध कराने का हमारा प्रयास।</p>
-</div>
-</div>
-</section>
+
 <section class="slider-section">
 <div class="slider">
 <div class="slide active"><div class="slide-content"><h2>📚 The Ravishankar Insights</h2><p>Study Material • Notes • PYQs • Syllabus</p></div></div>
@@ -1130,24 +1303,7 @@ routeFromHash();
 </script>
 
 
-<script id="move-banner-top">
-document.addEventListener("DOMContentLoaded", function(){
 
-  const header = document.querySelector("header");
-  const founder = document.querySelector("body > .founder-section");
-  const slider = document.querySelector("body > .slider-section");
-
-  if(header && founder && slider && !document.querySelector(".top-banner-area")){
-    const area = document.createElement("div");
-    area.className = "top-banner-area";
-
-    header.insertAdjacentElement("afterend", area);
-    area.appendChild(founder);
-    area.appendChild(slider);
-  }
-
-});
-</script>
 
 </body>
 </html>
