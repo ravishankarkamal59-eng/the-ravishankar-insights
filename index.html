@@ -706,46 +706,317 @@ body.route-home .founder-section{
 
 <style id="restore-home-content">
 /* =========================================
-   RESTORE EXISTING HOMEPAGE CONTENT
-   Premium top को रखते हुए नीचे का content वापस
+   FINAL HOMEPAGE CONTENT CONTROL
    ========================================= */
 
-body.route-home #about,
+/* Home पर केवल मुख्य content/details रहें */
 body.route-home #student,
+body.route-home .student-section,
+body.route-home #syllabus,
+body.route-home .syllabus-section,
+body.route-home .cards{
+  display:none!important;
+}
+
+/* Home पर content-detail sections दिखें */
+body.route-home #student-info,
+body.route-home #about,
 body.route-home #updates,
 body.route-home #contact,
-body.route-home #syllabus,
-body.route-home .student-section,
-body.route-home .syllabus-section,
 body.route-home .home-guidance,
 body.route-home .notice{
   display:block!important;
 }
 
-/* Existing study-material cards वापस */
-body.route-home .cards{
-  display:grid!important;
-  visibility:visible!important;
-  height:auto!important;
-  min-height:0!important;
-  padding:20px 6% 70px!important;
-  margin:0!important;
-  overflow:visible!important;
+/* Student/Syllabus routes पर अपने sections दिखें */
+body.route-student #student,
+body.route-student .student-section{
+  display:block!important;
 }
 
-/* Old duplicate founder बिल्कुल नहीं */
-body.route-home > .founder-section{
+body.route-syllabus #syllabus,
+body.route-syllabus .syllabus-section{
+  display:block!important;
+}
+
+/* Home पर पुराने duplicate sections नहीं */
+body.route-home #about-old,
+body.route-home #student-old{
+  display:none!important;
+}
+</style>
+
+
+<style id="final-home-section-separation">
+/* =========================================
+   HOME / STUDENT / SYLLABUS SEPARATION
+   ========================================= */
+
+/* Main Home पर Student Dashboard के cards नहीं */
+body.route-home #student,
+body.route-home .student-section,
+body.route-home #student-old{
   display:none!important;
 }
 
-/* Premium top हमेशा सबसे ऊपर */
+/* Main Home पर Syllabus के cards नहीं */
+body.route-home #syllabus,
+body.route-home .syllabus-section{
+  display:none!important;
+}
+
+/* पुराने generic cards भी Home पर नहीं */
+body.route-home .cards{
+  display:none!important;
+  visibility:hidden!important;
+  height:0!important;
+  padding:0!important;
+  margin:0!important;
+  overflow:hidden!important;
+}
+
+/* Student/Syllabus अपने route पर सामान्य रूप से दिखें */
+body.route-student #student,
+body.route-syllabus #syllabus{
+  display:block!important;
+}
+
+/* Premium top हमेशा Home पर रहे */
 body.route-home .premium-top{
   display:block!important;
 }
 
-/* पुराने automatic banner को वापस नहीं लाना */
+/* Founder duplicate नहीं */
+body.route-home > .founder-section{
+  display:none!important;
+}
+
+/* Automatic old banner नहीं */
 body.route-home .top-banner-area{
   display:none!important;
+}
+</style>
+
+
+<style id="FINAL-ROUTE-VISIBILITY">
+/* =========================================
+   FINAL ROUTE VISIBILITY
+   ========================================= */
+
+/* HOME
+   Premium + information/content blocks दिखें
+   Student/Syllabus cards बिल्कुल नहीं
+*/
+body.route-home #student,
+body.route-home .student-section,
+body.route-home #syllabus,
+body.route-home .syllabus-section,
+body.route-home .cards,
+body.route-home #student-old,
+body.route-home #about-old{
+  display:none!important;
+}
+
+body.route-home #student-info,
+body.route-home #about,
+body.route-home #updates,
+body.route-home .home-guidance,
+body.route-home .notice,
+body.route-home .slider-section,
+body.route-home #contact,
+body.route-home footer{
+  display:block!important;
+}
+
+/* STUDENT ROUTE
+   सिर्फ Student Dashboard
+*/
+body.route-student #student{
+  display:block!important;
+}
+
+body.route-student #student-info,
+body.route-student #about,
+body.route-student #updates,
+body.route-student .home-guidance,
+body.route-student .notice,
+body.route-student .slider-section,
+body.route-student #syllabus,
+body.route-student .syllabus-section,
+body.route-student .cards,
+body.route-student #contact,
+body.route-student footer{
+  display:none!important;
+}
+
+/* SYLLABUS ROUTE
+   सिर्फ Syllabus
+*/
+body.route-syllabus #syllabus{
+  display:block!important;
+}
+
+body.route-syllabus #student,
+body.route-syllabus .student-section,
+body.route-syllabus #student-info,
+body.route-syllabus #about,
+body.route-syllabus #updates,
+body.route-syllabus .home-guidance,
+body.route-syllabus .notice,
+body.route-syllabus .slider-section,
+body.route-syllabus .cards,
+body.route-syllabus #contact,
+body.route-syllabus footer{
+  display:none!important;
+}
+
+/* ABOUT ROUTE */
+body.route-about #about{
+  display:block!important;
+}
+
+/* UPDATES ROUTE */
+body.route-updates #updates{
+  display:block!important;
+}
+
+/* CONTACT ROUTE */
+body.route-contact #contact{
+  display:block!important;
+}
+</style>
+
+
+<style id="MASTER-FINAL-ROUTES">
+/* =========================================
+   MASTER FINAL ROUTE CONTROL
+   यह सबसे आखिरी CSS है इसलिए पुराने rules
+   को override करेगा।
+   ========================================= */
+
+/* ---------- HOME ---------- */
+
+body.route-home #student,
+body.route-home .student-section,
+body.route-home #syllabus,
+body.route-home .syllabus-section,
+body.route-home .cards,
+body.route-home #student-old,
+body.route-home #about-old {
+  display:none !important;
+}
+
+body.route-home .premium-top,
+body.route-home #student-info,
+body.route-home #about,
+body.route-home #updates,
+body.route-home .home-guidance,
+body.route-home .notice,
+body.route-home .slider-section,
+body.route-home #contact,
+body.route-home footer {
+  display:block !important;
+}
+
+
+/* ---------- STUDENT ---------- */
+
+body.route-student #student,
+body.route-student .student-section {
+  display:block !important;
+}
+
+body.route-student .premium-top,
+body.route-student #student-info,
+body.route-student #about,
+body.route-student #updates,
+body.route-student .home-guidance,
+body.route-student .notice,
+body.route-student .slider-section,
+body.route-student #syllabus,
+body.route-student .syllabus-section,
+body.route-student .cards,
+body.route-student #about-old,
+body.route-student #student-old,
+body.route-student #contact,
+body.route-student footer {
+  display:none !important;
+}
+
+
+/* ---------- SYLLABUS ---------- */
+
+body.route-syllabus #syllabus,
+body.route-syllabus .syllabus-section {
+  display:block !important;
+}
+
+body.route-syllabus .premium-top,
+body.route-syllabus #student,
+body.route-syllabus .student-section,
+body.route-syllabus #student-info,
+body.route-syllabus #about,
+body.route-syllabus #updates,
+body.route-syllabus .home-guidance,
+body.route-syllabus .notice,
+body.route-syllabus .slider-section,
+body.route-syllabus .cards,
+body.route-syllabus #about-old,
+body.route-syllabus #student-old,
+body.route-syllabus #contact,
+body.route-syllabus footer {
+  display:none !important;
+}
+
+
+/* ---------- ABOUT ---------- */
+
+body.route-about #about {
+  display:block !important;
+}
+
+body.route-about #student,
+body.route-about .student-section,
+body.route-about #syllabus,
+body.route-about .syllabus-section,
+body.route-about .cards,
+body.route-about #updates,
+body.route-about #contact {
+  display:none !important;
+}
+
+
+/* ---------- UPDATES ---------- */
+
+body.route-updates #updates {
+  display:block !important;
+}
+
+body.route-updates #student,
+body.route-updates .student-section,
+body.route-updates #syllabus,
+body.route-updates .syllabus-section,
+body.route-updates .cards,
+body.route-updates #about,
+body.route-updates #contact {
+  display:none !important;
+}
+
+
+/* ---------- CONTACT ---------- */
+
+body.route-contact #contact {
+  display:block !important;
+}
+
+body.route-contact #student,
+body.route-contact .student-section,
+body.route-contact #syllabus,
+body.route-contact .syllabus-section,
+body.route-contact .cards,
+body.route-contact #about,
+body.route-contact #updates {
+  display:none !important;
 }
 </style>
 
