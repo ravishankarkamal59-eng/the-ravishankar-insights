@@ -1161,6 +1161,195 @@ Open All Materials →
       link.remove();
     });
 
+    /*
+      ==========================================
+      CARD MATERIAL SYSTEM
+      ==========================================
+      हर Card को उसके exact title से identify
+      किया जाएगा।
+    */
+
+    const MATERIAL_API =
+      "https://ravishankar-insights-backend-1.onrender.com";
+
+    const materialCards =
+      clone.querySelectorAll(".student-card");
+
+    materialCards.forEach(card => {
+
+      const titleElement =
+        card.querySelector("h3");
+
+      if (!titleElement) return;
+
+      const cardTitle =
+        titleElement.textContent
+          .replace(/\s+/g, " ")
+          .trim();
+
+      const materialBox =
+        document.createElement("div");
+
+      materialBox.className =
+        "card-material-system";
+
+      materialBox.innerHTML = `
+        <div class="card-material-heading">
+          📚 Study Material
+        </div>
+
+        <div class="card-material-buttons">
+
+          <button
+            type="button"
+            data-material-type="pyq">
+            📄 PYQ
+          </button>
+
+          <button
+            type="button"
+            data-material-type="notes">
+            📝 Notes
+          </button>
+
+          <button
+            type="button"
+            data-material-type="syllabus">
+            📚 Syllabus
+          </button>
+
+        </div>
+
+        <div class="card-material-list"></div>
+      `;
+
+      card.appendChild(materialBox);
+
+      const list =
+        materialBox.querySelector(
+          ".card-material-list"
+        );
+
+      materialBox
+        .querySelectorAll(
+          "[data-material-type]"
+        )
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            async () => {
+
+              const type =
+                button.dataset.materialType;
+
+              list.innerHTML =
+                "⏳ Material load हो रहा है...";
+
+              try {
+
+                const response =
+                  await fetch(
+                    MATERIAL_API +
+                    "/api/card-materials?card=" +
+                    encodeURIComponent(cardTitle) +
+                    "&type=" +
+                    encodeURIComponent(type),
+                    {
+                      credentials: "include"
+                    }
+                  );
+
+                if (response.status === 401) {
+
+                  list.innerHTML = `
+                    <div class="card-material-login">
+                      🔐 Material देखने के लिए Student Login जरूरी है।
+                      <br><br>
+                      <a href="login.html">
+                        🎓 Student Login
+                      </a>
+                    </div>
+                  `;
+
+                  return;
+                }
+
+                const data =
+                  await response.json();
+
+                if (
+                  !response.ok ||
+                  !data.success
+                ) {
+                  throw new Error(
+                    data.message ||
+                    "Material API error"
+                  );
+                }
+
+                const materials =
+                  data.materials || [];
+
+                if (!materials.length) {
+
+                  list.innerHTML =
+                    "📭 इस Card में अभी " +
+                    type.toUpperCase() +
+                    " उपलब्ध नहीं है।";
+
+                  return;
+                }
+
+                list.innerHTML =
+                  materials.map(material => {
+
+                    const fileName =
+                      material.name ||
+                      "Study Material";
+
+                    const fileURL =
+                      MATERIAL_API +
+                      material.url;
+
+                    return `
+                      <div class="card-material-file">
+
+                        <span>
+                          📄 ${fileName}
+                        </span>
+
+                        <a
+                          href="${fileURL}"
+                          target="_blank"
+                          rel="noopener">
+                          🔓 Open
+                        </a>
+
+                      </div>
+                    `;
+
+                  }).join("");
+
+              } catch (error) {
+
+                console.error(
+                  "Card material error:",
+                  error
+                );
+
+                list.innerHTML =
+                  "❌ Material load नहीं हो पाया।";
+
+              }
+
+            }
+          );
+
+        });
+
+    });
+
   }catch(error){
 
     console.error(
