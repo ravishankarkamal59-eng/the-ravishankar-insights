@@ -250,22 +250,51 @@ Already registered? Login करें
 
 <div id="forgotSection" class="hidden">
 
-<label>Email</label>
+<label>Registered Mobile Number</label>
 
 <input
-type="email"
-id="forgotEmail"
-placeholder="Registered Email"
+type="tel"
+id="forgotMobile"
+maxlength="10"
+placeholder="Registered 10 digit mobile number"
 >
 
 <button
 type="button"
 onclick="forgotPassword()">
 
-📩 Reset Password
+📩 Send Reset OTP
 
 </button>
 
+<div id="resetOtpSection" class="hidden">
+
+<label>OTP</label>
+
+<input
+type="text"
+id="resetOtp"
+maxlength="6"
+placeholder="SMS से आया 6 digit OTP"
+>
+
+<label>New Password</label>
+
+<input
+type="password"
+id="newPassword"
+placeholder="नया Password"
+>
+
+<button
+type="button"
+onclick="resetPassword()">
+
+🔐 Reset Password
+
+</button>
+
+</div>
 
 <div
 class="link"
@@ -761,12 +790,137 @@ message(
 
 /* FORGOT PASSWORD */
 
-function forgotPassword(){
+async function forgotPassword(){
+
+const mobile =
+document.getElementById("forgotMobile").value.trim();
+
+if(!/^[0-9]{10}$/.test(mobile)){
+message("सही 10 digit registered mobile number डालें।","red");
+return;
+}
+
+message("Reset OTP भेजा जा रहा है...","#1677ff");
+
+try{
+
+const response = await fetch(
+API + "/api/student/forgot-password",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+credentials:"include",
+body:JSON.stringify({
+mobile:mobile
+})
+});
+
+const data = await response.json();
+
+if(!data.success){
+message(data.message || "OTP भेजने में समस्या हुई।","red");
+return;
+}
+
+document
+.getElementById("resetOtpSection")
+.classList.remove("hidden");
 
 message(
-"Forgot Password की backend सुविधा अभी अगले step में जोड़ेंगे।",
-"#1677ff"
+"✅ Reset OTP SMS से भेज दिया गया है।",
+"green"
 );
+
+}catch(error){
+
+console.error(error);
+
+message(
+"अभी सेवा उपलब्ध नहीं है। कृपया थोड़ी देर बाद फिर प्रयास करें।",
+"red"
+);
+
+}
+
+}
+
+
+async function resetPassword(){
+
+const mobile =
+document.getElementById("forgotMobile").value.trim();
+
+const otp =
+document.getElementById("resetOtp").value.trim();
+
+const newPassword =
+document.getElementById("newPassword").value;
+
+if(!/^[0-9]{10}$/.test(mobile)){
+message("सही 10 digit mobile number डालें।","red");
+return;
+}
+
+if(!/^[0-9]{6}$/.test(otp)){
+message("6 digit OTP डालें।","red");
+return;
+}
+
+if(!newPassword || newPassword.length < 6){
+message("नया Password कम से कम 6 characters का होना चाहिए।","red");
+return;
+}
+
+message("Password reset किया जा रहा है...","#1677ff");
+
+try{
+
+const response = await fetch(
+API + "/api/student/reset-password",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+credentials:"include",
+body:JSON.stringify({
+mobile:mobile,
+otp:otp,
+newPassword:newPassword
+})
+});
+
+const data = await response.json();
+
+if(!data.success){
+message(
+data.message || "Password reset नहीं हो पाया।",
+"red"
+);
+return;
+}
+
+message(
+"✅ Password सफलतापूर्वक reset हो गया। अब नए Password से Login करें।",
+"green"
+);
+
+setTimeout(function(){
+showLogin();
+},1800);
+
+}catch(error){
+
+console.error(error);
+
+message(
+"अभी सेवा उपलब्ध नहीं है। कृपया थोड़ी देर बाद फिर प्रयास करें।",
+"red"
+);
+
+}
 
 }
 
