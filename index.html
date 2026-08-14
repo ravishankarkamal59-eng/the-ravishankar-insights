@@ -1028,7 +1028,7 @@ body.route-home #about,
 body.route-home #contact{
   display:block!important;
   max-width:1100px;
-  margin:35px auto!important;
+  margin:0 auto!important;
   padding:0 20px!important;
   box-sizing:border-box;
 }
@@ -1073,7 +1073,7 @@ body.route-home #contact a:hover{
 @media(max-width:600px){
   body.route-home #about,
   body.route-home #contact{
-    margin:25px auto!important;
+    margin:0 auto!important;
     padding:0 12px!important;
   }
 
@@ -1815,3 +1815,14 @@ routeFromHash();
 
 </body>
 </html>
+
+<style id="CONTACT-GAP-REMOVE">
+/* सिर्फ Contact block के ऊपर का सफेद gap हटाएँ */
+html body #contact{
+  margin-top:0!important;
+  padding-top:0!important;
+}
+html body #contact .info-box{
+  margin-top:0!important;
+}
+</style>
